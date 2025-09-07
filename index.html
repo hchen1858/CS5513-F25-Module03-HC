@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- need meta viewport tag to allow for css media queries on mobile -->
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>CS55.13 Fall 2025 Week 3</title>
+	<!-- local css -->
+	<style>
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style-type:none;
+		}
+
+		li {
+      max-width: 30%;
+      background-color:silver;
+			display: block;
+      padding: 20px;
+      margin: 5px;
+		}
+
+    button {
+      font-family:'Times New Roman', Times, serif;
+      background-color: whitesmoke;
+      border: 3px;      
+      border-color: black;
+      font-size: 16px;
+    }
+
+    img {
+      max-width: 70%;
+      height: auto;
+    }
+
+	</style>
+  <!-- load jquery to use for external json loading -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- load React and react-dom-->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+      <!-- load babel transpiler to convert React's JSX markup to pure JavaScript
+       Note: we only need babel loaded in the browser if we are not using a build system 
+       where babel would save pure JS files to be loaded by the browser instead -->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+
+  <body>
+     <div id="app"></div>
+    <script type="text/jsx">
+
+      const app = document.getElementById('app');
+
+      function Header({title}) {
+        console.log(title);
+        return <h1>{title ? title : 'Default title'}</h1>;
+
+      }
+
+      function HomePage() {
+          const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
+          const [likes, setLikes] = React.useState(0);
+
+          function handleClick() {
+            setLikes(likes + 1);
+            console.log("increment like count")
+          }
+
+          return <div>
+            <Header title="React" />
+            <Header title="A new title"/>
+            <Header />
+            <ul>
+             {names.map((name) => (
+             <li key={name}>{name}</li>
+             ))}
+             </ul>
+             <button onClick={handleClick}>Like({likes})</button>
+          </div>;
+      }
+      const root = ReactDOM.createRoot(app);
+      root.render(<HomePage />);      
+    </script>  
+  </body>
+</html>
